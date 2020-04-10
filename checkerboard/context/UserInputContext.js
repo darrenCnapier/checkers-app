@@ -27,7 +27,7 @@ function userStateReducer(userState, action) {
       }
       return {
         ...userState,
-        boardSize: newSize
+        boardSize: newSize,
       };
     }
     case 'SHAPE': {

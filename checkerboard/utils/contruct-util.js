@@ -1,5 +1,4 @@
 export function boardBuild(boardDim) {
-  
   const board = [];
   const top = [];
   const bottom = [];

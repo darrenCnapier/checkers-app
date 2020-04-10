@@ -1,10 +1,10 @@
 import React from 'react';
-import {useBoardInfo} from './../context/BoardContext'
-import {useUserInput} from './../context/UserInputContext'
+import { useBoardInfo } from './../context/BoardContext';
+import { useUserInput } from './../context/UserInputContext';
 
-export default function Piece({coords}) {
-  const {topColor, shape} = useUserInput().userState;
-  const { top, bottom } = useBoardInfo().boardState;
+export default function Piece({ coords }) {
+  const { topColor, shape } = useUserInput().userState;
+  const { top, bottom, selectedPiece } = useBoardInfo().boardState;
 
   const isTop = top.includes(coords);
   const isBottom = bottom.includes(coords);
@@ -14,10 +14,11 @@ export default function Piece({coords}) {
 
   // conditional check on whether it should be considered a piece
   const piece = isTop || isBottom ? 'piece' : null;
+  // if piece selected, on click render yellow border
+  let selected = coords === selectedPiece ? 'selected' : '';
 
   return (
-    <div className={`${piece} ${shape} ${myColor}`}>
-
+    <div className={`${piece} ${shape} ${myColor} ${selected}`}>
       <style jsx>{`
         .piece {
           z-index: 20;

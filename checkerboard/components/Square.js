@@ -3,10 +3,23 @@ import Piece from './Piece';
 import { useBoardInfo } from './../context/BoardContext';
 
 export default function Square({ coords, col, row }) {
-  const { top, bottom } = useBoardInfo().boardState;
+  const { selectMe, makeMove } = useBoardInfo();
+  const { top, bottom, nextMoves } = useBoardInfo().boardState;
+
+  const isTop = top.includes(coords);
+  const isBottom = bottom.includes(coords);
+  const inNextMoves = nextMoves.includes(coords);
+
+  const topOrBottom = isTop ? 'top' : isBottom ? 'bottom' : null;
+  const possible = inNextMoves ? 'possible-move' : null;
 
   return (
-    <div className={`square ${(col + row) % 2 === 0 ? 'black' : 'white'}`}>
+    <div
+      className={`square ${(col + row) % 2 === 0 ? 'black' : 'white'} ${possible}`}
+      onClick={() => {
+        if (inNextMoves) makeMove(coords);
+        selectMe(coords, topOrBottom);
+      }}>
       <Piece coords={coords} />
 
       <style jsx>{`
@@ -25,6 +38,9 @@ export default function Square({ coords, col, row }) {
         }
         .black {
           background-color: black;
+        }
+        .possible-move {
+          background-color: lightblue;
         }
       `}</style>
     </div>

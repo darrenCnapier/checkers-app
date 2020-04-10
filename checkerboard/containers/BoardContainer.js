@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Board from './../components/Board';
 import { useUserInput } from './../context/UserInputContext';
 import { useBoardInfo } from './../context/BoardContext';
@@ -7,6 +7,12 @@ export default function BoardContainer() {
   const { boardSize } = useUserInput().userState;
   const { buildBoard } = useBoardInfo();
   const { board } = useBoardInfo().boardState;
+
+  console.log('boardSize on frontend', boardSize);
+
+  useEffect(() => {
+    buildBoard(boardSize);
+  }, [boardSize]);
 
   if (!board || !board.length) {
     buildBoard(boardSize);
