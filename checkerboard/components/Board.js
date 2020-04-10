@@ -1,14 +1,15 @@
-import React from 'react'
-import Row from './Row'
+import React from 'react';
+import Row from './Row';
+import { useBoardInfo } from './../context/BoardContext';
 
-export default function Board({board}) {
-
+export default function Board() {
+  const { board } = useBoardInfo().boardState;
   const checkerBoard = board.map((row, i) => {
-    return <Row contents={row} rownumber={i} key={i}/>});
-    
+    return <Row contents={row} rownumber={i} key={i} />;
+  });
+
   return (
     <div className='board'>
-
       {checkerBoard}
 
       <style jsx>{`
@@ -24,5 +25,5 @@ export default function Board({board}) {
         }
       `}</style>
     </div>
-  )
+  );
 }

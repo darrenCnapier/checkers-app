@@ -1,14 +1,20 @@
-import React from 'react'
-import Board from './../components/Board'
-import {boardBuild} from './../utils/contruct-util'
+import React from 'react';
+import Board from './../components/Board';
+import { useUserInput } from './../context/UserInputContext';
+import { useBoardInfo } from './../context/BoardContext';
 
-export default function BoardContainer({size}) {
-  const board  = boardBuild(size);
+export default function BoardContainer() {
+  const { boardSize } = useUserInput().userState;
+  const { buildBoard } = useBoardInfo();
+  const { board } = useBoardInfo().boardState;
+
+  if (!board || !board.length) {
+    buildBoard(boardSize);
+  }
 
   return (
     <div>
-      
-      <Board board={board}/>
+      <Board />
 
       <style jsx>{`
         .board-container {
@@ -19,5 +25,5 @@ export default function BoardContainer({size}) {
         }
       `}</style>
     </div>
-  )
+  );
 }

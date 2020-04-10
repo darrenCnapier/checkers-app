@@ -1,19 +1,19 @@
-import React, {useState} from 'react'
-import BoardContainer from './BoardContainer'
-import UserContainer from './UserInputContainer'
+import React, { useState } from 'react';
+import BoardContainer from './BoardContainer';
+import UserContainer from './UserInputContainer';
+import { UserInfoProvider } from './../context/UserInputContext';
+import { BoardContextProvider } from './../context/BoardContext';
 
 export default function MainContainer() {
-  const [boardSize, setBoardSize] = useState(8)
-
-  const updateSize = (e) => {
-    setBoardSize(e.target.value)
-  }
-
   return (
     <div className='container'>
+      <UserInfoProvider>
+        <BoardContextProvider>
+          <UserContainer />
+          <BoardContainer />
+        </BoardContextProvider>
+      </UserInfoProvider>
 
-      <UserContainer resize={updateSize} size={boardSize}/>
-      <BoardContainer size={boardSize}/>
       <style jsx>{`
         .container {
           min-height: 420px;
@@ -21,5 +21,5 @@ export default function MainContainer() {
         }
       `}</style>
     </div>
-  )
+  );
 }

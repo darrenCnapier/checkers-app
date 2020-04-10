@@ -1,12 +1,11 @@
-import React from 'react'
-import Square from './Square'
+import React from 'react';
+import Square from './Square';
 
-export default function Row({contents, rownumber}) {
-
+export default function Row({ contents, rownumber }) {
   return (
     <div className='row'>
-      {contents.map((squareNum, i)=> {
-        return <Square coords={squareNum} col={i} row={rownumber} key={i}/>
+      {contents.map((squareNum, i) => {
+        return <Square coords={squareNum} col={i} row={rownumber} key={i} />;
       })}
       <style jsx>
         {`
@@ -20,5 +19,5 @@ export default function Row({contents, rownumber}) {
         `}
       </style>
     </div>
-  )
+  );
 }

@@ -1,8 +1,8 @@
-import MainContainer from './../containers/MainContainer'
+import MainContainer from './../containers/MainContainer';
 
 export default () => (
   <div className='main'>
-    <MainContainer/>
+    <MainContainer />
     <style jsx>{`
       .main {
         margin: auto;
