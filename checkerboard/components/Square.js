@@ -6,6 +6,9 @@ export default function Square({ coords, col, row }) {
   const { selectMe, makeMove } = useBoardInfo();
   const { top, bottom, nextMoves } = useBoardInfo().boardState;
 
+  // Array.prototype.includes() is not my preferred method, but knowing the data size
+  // of the arrays was minimal, it made for a decent trade off in terms of simplicity 
+  
   const isTop = top.includes(coords);
   const isBottom = bottom.includes(coords);
   const inNextMoves = nextMoves.includes(coords);

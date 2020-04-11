@@ -1,5 +1,13 @@
+// Custom context providers => Ken C Dodds, is a big fan of this approach if looking
+// to build ContextProviders. It offers a cleaner look.
+
+// Coupled with useReducer and useMemo, should help in eliminating some re-rendering 
+// when not necessary as it memoizes state.
+
+
 import React, { useContext, useReducer, useMemo } from 'react';
 import { boardBuild } from './../utils/contruct-util';
+import { useUserInput } from './UserInputContext';
 
 const BoardContext = React.createContext();
 
@@ -15,8 +23,6 @@ const initialBoardState = {
 function boardReducer(boardState, action) {
   const { turn, selectedPiece, top, bottom, nextMoves, board } = boardState;
 
-  console.log(action.type, 'payload', action.payload);
-
   switch (action.type) {
     case 'BUILD': {
       const { size } = action.payload;
@@ -24,9 +30,6 @@ function boardReducer(boardState, action) {
       const newBoard = onlyBoard.board;
       const newTop = onlyBoard.top;
       const newBottom = onlyBoard.bottom;
-
-      console.log('top', newTop, 'bottom', newBottom, 'board', newBoard);
-      console.log('size', size);
 
       return {
         ...boardState,
@@ -89,6 +92,12 @@ function boardReducer(boardState, action) {
         nextMoves: [],
       };
     }
+    case 'RESTORE': {
+      const { board } = action.payload;
+      return {
+        ...board,
+      };
+    }
     default: {
       throw new Error(`Unsupported action type ${action.type}`);
     }
@@ -96,6 +105,9 @@ function boardReducer(boardState, action) {
 }
 
 function useBoardInfo() {
+  const { save, reset } = useUserInput().userState;
+  const { endSave, endReset } = useUserInput();
+
   const context = useContext(BoardContext);
   if (!context) throw new Error('Must access useBoardInfo inside BoardContext');
   const [boardState, dispatch] = context;
@@ -108,6 +120,15 @@ function useBoardInfo() {
   const makeMove = (coords) => {
     dispatch({ type: 'MOVE', payload: { coords } });
   };
+  const restoreBoard = (board) => dispatch({ type: 'RESTORE', payload: { board } });
+  if (save) {
+    endSave();
+    localStorage.setItem('BOARD', JSON.stringify(boardState));
+  }
+  if (reset) {
+    endReset();
+    dispatch({ type: 'BUILD', payload: { size: 8 } });
+  }
 
   return {
     boardState,
@@ -115,6 +136,7 @@ function useBoardInfo() {
     buildBoard,
     selectMe,
     makeMove,
+    restoreBoard,
   };
 }
 

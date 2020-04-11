@@ -17,6 +17,9 @@ export default function Piece({ coords }) {
   // if piece selected, on click render yellow border
   let selected = coords === selectedPiece ? 'selected' : '';
 
+
+  // opted to go the route of the conditional rendering grabbing props for the conditionals
+  
   return (
     <div className={`${piece} ${shape} ${myColor} ${selected}`}>
       <style jsx>{`

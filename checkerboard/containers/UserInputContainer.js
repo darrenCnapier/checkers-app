@@ -1,9 +1,13 @@
 import React from 'react';
 import { useUserInput } from '../context/UserInputContext';
 
+// given the time constraint, opted to build this container as such...otherwise,
+// would have taken the approach to build closer to the Atomic Design Theory
+// creating separate components for nearly all elements => crucial if building out a
+// component library (IMO)
+
 export default function UserInputContainer() {
-  const { changeColor, changeShape, updateSize } = useUserInput();
-  // const {boardSize} = useUserInput().userState
+  const { changeColor, changeShape, updateSize, save, reset } = useUserInput();
   return (
     <div className='user-inputs'>
       <div className='toggle-inputs'>
