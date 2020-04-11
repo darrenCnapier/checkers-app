@@ -10,16 +10,16 @@ export default function Piece({ coords }) {
   const isBottom = bottom.includes(coords);
 
   const bottomColor = topColor === 'red' ? 'black' : 'red';
-  const myColor = isTop ? topColor : isBottom ? bottomColor : null;
+  const myColor = isTop ? topColor : isBottom ? bottomColor : '';
 
   // conditional check on whether it should be considered a piece
-  const piece = isTop || isBottom ? 'piece' : null;
+  const piece = isTop || isBottom ? 'piece' : '';
   // if piece selected, on click render yellow border
   let selected = coords === selectedPiece ? 'selected' : '';
 
 
   // opted to go the route of the conditional rendering grabbing props for the conditionals
-  
+
   return (
     <div className={`${piece} ${shape} ${myColor} ${selected}`}>
       <style jsx>{`

@@ -8,13 +8,13 @@ export default function Square({ coords, col, row }) {
 
   // Array.prototype.includes() is not my preferred method, but knowing the data size
   // of the arrays was minimal, it made for a decent trade off in terms of simplicity 
-  
+
   const isTop = top.includes(coords);
   const isBottom = bottom.includes(coords);
   const inNextMoves = nextMoves.includes(coords);
 
-  const topOrBottom = isTop ? 'top' : isBottom ? 'bottom' : null;
-  const possible = inNextMoves ? 'possible-move' : null;
+  const topOrBottom = isTop ? 'top' : isBottom ? 'bottom' : '';
+  const possible = inNextMoves ? 'possible-move' : '';
 
   return (
     <div
@@ -23,7 +23,7 @@ export default function Square({ coords, col, row }) {
         if (inNextMoves) makeMove(coords);
         selectMe(coords, topOrBottom);
       }}>
-      <Piece coords={coords} />
+      {(isTop || isBottom) && <Piece coords={coords} />}
 
       <style jsx>{`
         .square {
