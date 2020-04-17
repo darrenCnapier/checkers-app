@@ -1,27 +1,8 @@
 import React from 'react';
-import { useBoardInfo } from './../context/BoardContext';
-import { useUserInput } from './../context/UserInputContext';
 
-export default function Piece({ coords }) {
-  const { topColor, shape } = useUserInput().userState;
-  const { top, bottom, selectedPiece } = useBoardInfo().boardState;
-
-  const isTop = top.includes(coords);
-  const isBottom = bottom.includes(coords);
-
-  const bottomColor = topColor === 'red' ? 'black' : 'red';
-  const myColor = isTop ? topColor : isBottom ? bottomColor : '';
-
-  // conditional check on whether it should be considered a piece
-  const piece = isTop || isBottom ? 'piece' : '';
-  // if piece selected, on click render yellow border
-  let selected = coords === selectedPiece ? 'selected' : '';
-
-
-  // opted to go the route of the conditional rendering grabbing props for the conditionals
-
+export default function Piece({ color, selected, shape }) {
   return (
-    <div className={`${piece} ${shape} ${myColor} ${selected}`}>
+    <div className={`piece ${shape} ${color} ${selected}`}>
       <style jsx>{`
         .piece {
           z-index: 20;

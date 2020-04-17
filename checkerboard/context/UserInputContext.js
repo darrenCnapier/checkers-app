@@ -1,7 +1,7 @@
 // Custom context providers => Ken C Dodds, is a big fan of this approach if looking
 // to build ContextProviders. It offers a cleaner look.
 
-// Coupled with useReducer and useMemo, should help in eliminating some re-rendering 
+// Coupled with useReducer and useMemo, should help in eliminating some re-rendering
 // when not necessary as it memoizes state.
 
 import React, { useReducer, useMemo, useContext } from 'react';

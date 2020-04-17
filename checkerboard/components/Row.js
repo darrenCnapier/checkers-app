@@ -1,9 +1,9 @@
 import React from 'react';
 import Square from './Square';
 
-// originally was thinking or possibly using flex-flow, but then 
-// chose to go the route of creating rows for the pieces, to ensure 
-// the coordinates on buildBoard would stay relevant 
+// originally was thinking or possibly using flex-flow, but then
+// chose to go the route of creating rows for the pieces, to ensure
+// the coordinates on buildBoard would stay relevant
 
 export default function Row({ contents, rownumber }) {
   return (

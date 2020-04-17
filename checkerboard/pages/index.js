@@ -4,10 +4,8 @@ import MainContainer from './../containers/MainContainer';
 // if styled components were not in place, would have opted to do similar styling
 // via individual folders for components with the style sheet close by for easy maintenance
 
-
 export default () => (
   <div className='main'>
-
     <MainContainer />
 
     <style jsx>{`
